@@ -21,12 +21,12 @@ const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Opt
     },
     transform(code, id) {
       let modified = code;
-      project.createSourceFile(id);
+      project.createSourceFile(id, code);
       const stories = extractCSF(project, id, getPropsType);
-      modified += '\n\n// ---(Component types detected)---';
+      modified += '\n\n// ---(Component types detected)---\n';
       Object.entries(stories).forEach(([storyName, types]) => {
         const argTypes = convertType(types);
-        modified += `${storyName}.argTypes = ${JSON.stringify(argTypes, null, 2)};\n`;
+        modified += `${storyName}.argTypes = ${JSON.stringify(argTypes, null, 2)};\n\n`;
       });
       return modified;
     },
