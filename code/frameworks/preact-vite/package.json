@@ -47,9 +47,13 @@
     "prep": "../../../scripts/prepare/bundle.ts"
   },
   "dependencies": {
+    "@krofdrakula/prop-docs-preact": "^0.0.6",
+    "@krofdrakula/prop-docs-storybook": "^0.0.6",
     "@preact/preset-vite": "^2.0.0",
     "@storybook/builder-vite": "7.0.0-beta.46",
-    "@storybook/preact": "7.0.0-beta.46"
+    "@storybook/preact": "7.0.0-beta.46",
+    "ts-morph": "^17.0.1",
+    "unplugin": "^1.0.1"
   },
   "devDependencies": {
     "@types/node": "^16.0.0",
