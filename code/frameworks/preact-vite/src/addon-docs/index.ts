@@ -26,7 +26,10 @@ const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Opt
       modified += '\n\n// ---(Component types detected)---\n';
       Object.entries(stories).forEach(([storyName, types]) => {
         const argTypes = convertType(types);
-        modified += `${storyName}.argTypes = ${JSON.stringify(argTypes, null, 2)};\n\n`;
+        modified += `${storyName}.argTypes = Object.assign(
+  ${JSON.stringify(argTypes)},
+  ${storyName}.argTypes ?? {}
+);\n\n`;
       });
       return modified;
     },
