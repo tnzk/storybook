@@ -28,13 +28,14 @@ const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Opt
       project.createSourceFile(id, code);
       const stories = extractCSF(project, id, getPropsType);
       modified += '\n\n// ---(Component types detected)---\n';
-      Object.entries(stories).forEach(([storyName, types]) => {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [storyName, types] of Object.entries(stories)) {
         const argTypes = convertType(types);
         modified += `${storyName}.argTypes = Object.assign(
   ${JSON.stringify(argTypes)},
   ${storyName}.argTypes ?? {}
 );\n\n`;
-      });
+      }
       return modified;
     },
   };
