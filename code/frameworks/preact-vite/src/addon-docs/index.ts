@@ -21,6 +21,10 @@ const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Opt
     },
     transform(code, id) {
       let modified = code;
+      {
+        const existing = project.getSourceFile(id);
+        if (existing) project.removeSourceFile(existing);
+      }
       project.createSourceFile(id, code);
       const stories = extractCSF(project, id, getPropsType);
       modified += '\n\n// ---(Component types detected)---\n';
