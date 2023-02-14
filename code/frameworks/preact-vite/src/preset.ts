@@ -3,7 +3,7 @@ import type { PresetProperty } from '@storybook/types';
 import preact from '@preact/preset-vite';
 import { Project } from 'ts-morph';
 import type { StorybookConfig } from './types';
-import { vitePlugin } from './addon-docs';
+import { vite as vitePlugin } from './addon-docs';
 
 export const core: PresetProperty<'core', StorybookConfig> = {
   builder: '@storybook/builder-vite',
@@ -18,9 +18,14 @@ export const viteFinal: StorybookConfig['viteFinal'] = async (config) => {
     plugins.push(preact());
   }
 
-  const project = new Project({ skipAddingFilesFromTsConfig: true });
-
-  plugins.push(vitePlugin({ project }));
+  plugins.push(
+    vitePlugin({
+      project: new Project({
+        skipAddingFilesFromTsConfig: true,
+        skipLoadingLibFiles: true,
+      }),
+    })
+  );
 
   return config;
 };

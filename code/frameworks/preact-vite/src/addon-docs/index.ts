@@ -8,24 +8,21 @@ interface Options {
   storyMatcher?: (id: string) => boolean;
 }
 
-const STORY_MATCHER = /\.stories\.[tj]sx$/;
+const STORY_MATCHER = /\.(story|stories)\.[tj]sx$/;
 
 const defaultMatcher = (id: string) => STORY_MATCHER.test(id);
 
-const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Options) => {
+const unplugin = createUnplugin<Options>(({ project, storyMatcher = defaultMatcher }) => {
   if (!project) throw new Error('Must provide a ts-morph Project instance!');
   return {
     name: 'unplugin-preact-addon-docs',
+    enforce: 'pre',
     transformInclude(id) {
       return storyMatcher(id);
     },
     transform(code, id) {
       let modified = code;
-      {
-        const existing = project.getSourceFile(id);
-        if (existing) project.removeSourceFile(existing);
-      }
-      project.createSourceFile(id, code);
+      project.createSourceFile(id, code, { overwrite: true });
       const stories = extractCSF(project, id, getPropsType);
       modified += '\n\n// ---(Component types detected)---\n';
       // eslint-disable-next-line no-restricted-syntax
@@ -41,7 +38,4 @@ const unplugin = createUnplugin(({ project, storyMatcher = defaultMatcher }: Opt
   };
 });
 
-export const vitePlugin = unplugin.vite;
-export const webpackPlugin = unplugin.webpack;
-export const esbuildPlugin = unplugin.esbuild;
-export const rollupPlugin = unplugin.rollup;
+export const { esbuild, rollup, vite, webpack } = unplugin;
