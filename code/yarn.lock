@@ -3083,24 +3083,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@krofdrakula/prop-docs-preact@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@krofdrakula/prop-docs-preact@npm:0.0.6"
+"@krofdrakula/prop-docs-preact@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@krofdrakula/prop-docs-preact@npm:0.0.9"
   peerDependencies:
     preact: ">=10"
     ts-morph: ^17.0.1
     typescript: ">=4"
-  checksum: 16f4d1bf69d8b5439846457986ea317df32113f625fe4c42b515ffe0e8e1c67496333cec42def65db225ed473a9d4ed38e9abe6669d7daa0d86afccaa7ac00e8
+  checksum: 38f94e8d4092649df54453401aa80c3d8d0b3e075a8d21c0d994908590f7a6e3647741370f89df9a39b668e876ee62ec29eccb8f0ef9f45276631aaac9211b83
   languageName: node
   linkType: hard
 
-"@krofdrakula/prop-docs-storybook@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@krofdrakula/prop-docs-storybook@npm:0.0.6"
+"@krofdrakula/prop-docs-storybook@npm:^0.0.9":
+  version: 0.0.9
+  resolution: "@krofdrakula/prop-docs-storybook@npm:0.0.9"
   peerDependencies:
     ts-morph: ^17.0.1
     typescript: ">=4"
-  checksum: 5eba2f9f969fa5c8fa438a508c4c4c6571fbe454fa9ba0f653bca54b0715ce689eec903ba839a1144def29583abdb39bf3990eb82976f6e3699479de8e2625b0
+  checksum: 070f4842d79d31bf7a81e57e5b6b49bb50ea85b56cf0f610b09ca9bd686a4b745eec67c4d5e5a45f86c992f90b3bae2aa2744dffcc611e4a541d269b237fed89
   languageName: node
   linkType: hard
 
@@ -6602,8 +6602,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@storybook/preact-vite@workspace:frameworks/preact-vite"
   dependencies:
-    "@krofdrakula/prop-docs-preact": ^0.0.6
-    "@krofdrakula/prop-docs-storybook": ^0.0.6
+    "@krofdrakula/prop-docs-preact": ^0.0.9
+    "@krofdrakula/prop-docs-storybook": ^0.0.9
     "@preact/preset-vite": ^2.0.0
     "@storybook/builder-vite": 7.0.0-beta.46
     "@storybook/preact": 7.0.0-beta.46

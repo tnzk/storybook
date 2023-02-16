@@ -1,10 +1,14 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import type { FunctionalComponent } from 'preact';
 
 interface Props {
+  /** The account owner's name */
   owner: string;
+  /** The amount to allow overdrawing */
   allowance: number;
+  /** A list of expenses for the given account, negative means outflow */
   expenses: { amount: number; note: string }[];
 }
 
@@ -20,10 +24,25 @@ export const BalanceSheet: FunctionalComponent<Props> = ({ expenses, owner, allo
 
   return (
     <>
+      <style>{`
+        .finance {
+          border-collapse: collapse;
+        }
+
+        .finance td, .finance th {
+          border: 1px solid #ccc;
+          padding: 2px 6px;
+        }
+
+        .finance .number {
+          text-align: right;
+        }
+      `}</style>
       <h1>Expenses for {owner}</h1>
-      <table>
+      <table className="finance">
         <thead>
           <tr>
+            <th />
             <th>Amount</th>
             <th>Note</th>
           </tr>
@@ -31,21 +50,24 @@ export const BalanceSheet: FunctionalComponent<Props> = ({ expenses, owner, allo
         <tbody>
           {expenses.map(({ amount, note }) => (
             <tr>
-              <td>{formatMoney(amount)}</td>
+              <th />
+              <td className="number">{formatMoney(amount)}</td>
               <td>{note}</td>
             </tr>
           ))}
         </tbody>
         <tfoot>
           <tr>
-            <td colSpan={2}>
-              Total: <strong>{formatMoney(sum)}</strong>
+            <th>Total:</th>
+            <td className="number">
+              <strong>{formatMoney(sum)}</strong>
             </td>
+            <td />
           </tr>
         </tfoot>
       </table>
       <p>
-        {allowance - sum < 0 ? (
+        {allowance + sum < 0 ? (
           <strong>Warning: account is overdrawn!</strong>
         ) : (
           `Account is within allowance.`

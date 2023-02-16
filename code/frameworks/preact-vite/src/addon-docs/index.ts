@@ -24,7 +24,7 @@ const unplugin = createUnplugin<Options>(({ project, storyMatcher = defaultMatch
       let modified = code;
       project.createSourceFile(id, code, { overwrite: true });
       const stories = extractCSF(project, id, getPropsType);
-      modified += '\n\n// ---(Component types detected)---\n';
+      modified += `;\n\n// ---(Component types detected)---\n`;
       // eslint-disable-next-line no-restricted-syntax
       for (const [storyName, types] of Object.entries(stories)) {
         const argTypes = convertType(types);
