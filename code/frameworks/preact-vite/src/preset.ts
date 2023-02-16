@@ -1,7 +1,7 @@
 import { hasVitePlugins } from '@storybook/builder-vite';
 import type { PresetProperty } from '@storybook/types';
 import preact from '@preact/preset-vite';
-import { Project } from 'ts-morph';
+import { Project, ts } from 'ts-morph';
 import type { StorybookConfig } from './types';
 import { vite as vitePlugin } from './addon-docs';
 
@@ -23,6 +23,12 @@ export const viteFinal: StorybookConfig['viteFinal'] = async (config) => {
       project: new Project({
         skipAddingFilesFromTsConfig: true,
         skipLoadingLibFiles: true,
+        compilerOptions: {
+          target: ts.ScriptTarget.ESNext,
+          allowJs: true,
+          jsx: ts.JsxEmit.ReactJSX,
+          jsxImportSource: 'preact',
+        },
       }),
     })
   );
