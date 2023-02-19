@@ -1,5 +1,5 @@
+import type { StoryObj } from '@storybook/preact';
 import type { ComponentProps } from 'preact';
-import type { StoryObj } from '@storybook/preact/dist/index';
 import { BalanceSheet } from './Typed';
 
 export default {

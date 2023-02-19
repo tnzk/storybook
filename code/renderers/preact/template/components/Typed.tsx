@@ -2,6 +2,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import type { FunctionalComponent } from 'preact';
+import { useMemo } from 'preact/hooks';
 
 interface Props {
   /** The account owner's name */
@@ -20,7 +21,7 @@ const formatMoney = (amount: number): string =>
   });
 
 export const BalanceSheet: FunctionalComponent<Props> = ({ expenses, owner, allowance }) => {
-  const sum = expenses.reduce((acc, next) => acc + next.amount, 0);
+  const sum = useMemo(() => expenses.reduce((acc, next) => acc + next.amount, 0), [expenses]);
 
   return (
     <>
@@ -68,7 +69,7 @@ export const BalanceSheet: FunctionalComponent<Props> = ({ expenses, owner, allo
       </table>
       <p>
         {allowance + sum < 0 ? (
-          <strong>Warning: account is overdrawn!</strong>
+          <strong>Warning: account is overdrawn by {formatMoney(-(allowance + sum))}!</strong>
         ) : (
           `Account is within allowance.`
         )}

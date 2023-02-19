@@ -21,8 +21,6 @@ export const viteFinal: StorybookConfig['viteFinal'] = async (config) => {
   plugins.push(
     vitePlugin({
       project: new Project({
-        skipAddingFilesFromTsConfig: true,
-        skipLoadingLibFiles: true,
         compilerOptions: {
           target: ts.ScriptTarget.ESNext,
           allowJs: true,
