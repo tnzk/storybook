@@ -55,6 +55,15 @@ export const createStorybookWrapperComponent = (
   const analyzedMetadata = new PropertyExtractor(moduleMetadata, storyComponent);
   const { imports, declarations, providers } = analyzedMetadata;
 
+  // Providers from ModuleWithProviders are filtered out, because they are imported in the bootstrapApplication providers section
+  const importsWithoutProviders = imports.map((i) => {
+    if (i.ngModule) {
+      return i.ngModule;
+    }
+
+    return i;
+  });
+
   // Only create a new module if it doesn't already exist
   // This is to prevent the module from being recreated on every story change
   // Declarations & Imports are only added once
@@ -63,8 +72,8 @@ export const createStorybookWrapperComponent = (
   if (!ngModule) {
     @NgModule({
       declarations,
-      imports,
-      exports: [...declarations, ...imports],
+      imports: importsWithoutProviders,
+      exports: [...declarations, ...importsWithoutProviders],
     })
     class StorybookComponentModule {}
 
